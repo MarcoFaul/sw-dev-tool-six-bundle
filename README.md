@@ -21,7 +21,7 @@ In your `AppKernel`:
         $bundles = [
           // ...
           new \JMS\SerializerBundle\JMSSerializerBundle(),
-          new \Enm\Bundle\ShopwareSdk\EnmShopwareSdkBundle(),
+          new \MarcoFaul\SwDevToolSixBundle\SwDevToolSixBundle(),
         ];
          // ...
          
@@ -31,18 +31,10 @@ In your `AppKernel`:
 ## Configuration
 Simply configure your shop connection over the global `config.yml`:
 
-    enm_shopware_sdk:
-        base_url: "http://your-shop.com"
-        username: "test"
-        api_key: "test"
-
-This bundle overwrites the default naming strategy of the serializer with `IdenticalPropertyNamingStrategy`.
-
-## Usage
-
-    /** @var \Enm\Bundle\ShopwareSdk\EntryPoint $shopwareClient */
-    $entryPoint = $container->get('enm.shopware.entry_point');
+    sw_dev_tool_six:
+        access_token_ttl: P1W
+        enable_dal_caching: false:
 
 ## Tests
 
-    php vendor/bin/phpunit
+    php vendor/bin/simple-phpunit

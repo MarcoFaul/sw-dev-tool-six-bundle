@@ -16,9 +16,19 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('access_token_ttl')->defaultValue('PT10M')->info('Default is PT10M')->end()
-                ->booleanNode('disable_dal_caching')->defaultTrue()->end()
-            ->end();
+                ->booleanNode('enable_dal_caching')->defaultFalse()->info('Disable the DAL entity searcher cache')->end()
+            ->arrayNode('shopware')
+                ->arrayPrototype()
+                    ->children()
+                        ->scalarNode('skipFirstRunWizardClient')->defaultTrue()->info('@TODO')->end()
+                        ->scalarNode('disableAutoUpdate')->defaultTrue()->info('@TODO')->end()
+                        ->scalarNode('disableApiAuthRequire')->defaultTrue()->info('@TODO')->end()
+                        ->scalarNode('disableCSRF')->defaultTrue()->info('@TODO')->end()
+                    ->end()
+                ->end()
+            ->end()
 
+            ->end();
         return $treeBuilder;
     }
 }

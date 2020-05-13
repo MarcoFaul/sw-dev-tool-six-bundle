@@ -3,32 +3,21 @@
 
 namespace MarcoFaul\SwDevToolSixBundle\DependencyInjection;
 
-
-use SebastianBergmann\GlobalState\TestFixture\BlacklistedInterface;
-use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Extension\Extension;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class SwDevToolSixExtension extends Extension
 {
-
     public function load(array $configs, ContainerBuilder $container)
     {
-        $configuration = $this->getConfiguration($configs, $container);
+        $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new XmlFileLoader($container, new Filelocator(__DIR__ . '/../Resources/config/'));
-        $loader->load('services.xml');
-
-
-        $container->setParameter('Shopware\Core\Framework\Api\EventListener\Authentication\ApiAuthenticationListener', 'MarcoFaul\SwDevToolSixBundle\Api\EventListener\Authentication\ApiAuthenticationListenerExtension');
-
-        $container->registerForAutoconfiguration(BlacklistedInterface::class)->addTag('blub');
-        $definition = $container->getDefinition('MarcoFaul\SwDevToolSixBundle\Api\EventListener\Authentication\ApiAuthenticationListenerExtension');
-        $definition->setArgument(6, $config['access_token_ttl']);
-
-
-//        var_dump($config);die;
+        $container->setParameter('sw_dev_tool_six.access_token_ttl', $config['access_token_ttl']);
+        $container->setParameter('sw_dev_tool_six.enable_dal_caching', $config['enable_dal_caching']);
+        $container->setParameter('sw_dev_tool_six.shopware.skipFirstRunWizardClient', $config['shopware']['skipFirstRunWizardClient']['skipFirstRunWizardClient']);
+        $container->setParameter('sw_dev_tool_six.shopware.disableAutoUpdate', !$config['shopware']['disableAutoUpdate']['disableAutoUpdate']);
+        $container->setParameter('sw_dev_tool_six.shopware.disableApiAuthRequire', !$config['shopware']['disableApiAuthRequire']['disableApiAuthRequire']);
+        $container->setParameter('sw_dev_tool_six.shopware.disableCSRF', !$config['shopware']['disableCSRF']['disableCSRF']);
     }
 }

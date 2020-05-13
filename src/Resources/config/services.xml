@@ -17,6 +17,12 @@
             <argument type="service" id="Shopware\Core\Framework\Routing\RouteScopeRegistry"/>
         </service>
 
-<!--        <service alias="" id="" />-->
+        <service id="MarcoFaul\SwDevToolSixBundle\DependencyInjection\CachedEntitySearcher"
+                 decorates="Shopware\Core\Framework\DataAbstractionLayer\Cache\CachedEntitySearcher"
+                 decoration-priority="-1000">
+
+            <argument type="service" id="MarcoFaul\SwDevToolSixBundle\DependencyInjection\CachedEntitySearcher.inner"/>
+            <argument>%sw_dev_tool_six.enable_dal_caching%</argument>
+        </service>
     </services>
 </container>
