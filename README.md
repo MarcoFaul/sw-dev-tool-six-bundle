@@ -6,8 +6,8 @@ Todos:
 - [ ] Change composer version
 - [ ] publish to packagist
 - [ ] write tests
-- [ ] enable travis CI
-- [ ] add other userfull stuff
+- [ ] add other use full stuff
+- [x] enable travis CI
 
 The Bundle provides the default implementation of `enm/shopware-sdk` with `guzzlehttp/guzzle` and `jms/serializer` as service.
 

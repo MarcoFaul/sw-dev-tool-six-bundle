@@ -11,7 +11,7 @@
     ],
     "require": {
         "php": "~7.2",
-        "shopware/platform": "^6.1.*"
+        "shopware/platform": "^6.1"
     },
     "autoload": {
         "psr-4": {
