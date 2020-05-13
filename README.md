@@ -11,8 +11,7 @@ Todos:
 
 The Bundle provides the default implementation of `enm/shopware-sdk` with `guzzlehttp/guzzle` and `jms/serializer` as service.
 
-[![Build Status](https://travis-ci.org/eosnewmedia/ShopwareSdkBundle.svg?branch=master)](https://travis-ci.org/eosnewmedia/ShopwareSdkBundle)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/77b8f306-eefe-45a0-8500-c5ca6a7f56a0/mini.png)](https://insight.sensiolabs.com/projects/77b8f306-eefe-45a0-8500-c5ca6a7f56a0)
+[![Build Status](https://travis-ci.com/MarcoFaul/sw-dev-tool-six-bundle.svg?branch=master)](https://travis-ci.com/MarcoFaul/sw-dev-tool-six-bundle)
 
 ## Installation
 
