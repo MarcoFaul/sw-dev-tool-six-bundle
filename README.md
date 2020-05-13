@@ -3,6 +3,8 @@
 
 Todos: 
 - [ ] Change readme
+- [ ] Add code coverage pipline badge
+- [ ] Add unittest pipline badge
 - [ ] Change composer version
 - [ ] publish to packagist
 - [ ] write tests
