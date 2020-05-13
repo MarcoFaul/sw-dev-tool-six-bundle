@@ -1,6 +1,13 @@
 # Shopware Developer Tool
 =======================
-//@TODO: CHANGE ME
+
+Todos: 
+- [ ] Change readme
+- [ ] Change composer version
+- [ ] publish to packagist
+- [ ] write tests
+- [ ] enable travis CI
+- [ ] add other userfull stuff
 
 The Bundle provides the default implementation of `enm/shopware-sdk` with `guzzlehttp/guzzle` and `jms/serializer` as service.
 
