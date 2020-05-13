@@ -1,0 +1,29 @@
+{
+    "name": "marcofaul/sw-dev-tool-six-bundle",
+    "description": "Helper tool for developing with showpare six",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "marcofaul",
+            "email": "marcofaul@protonmail.com"
+        }
+    ],
+    "require": {
+        "php": "~7.2",
+        "shopware/platform": "^6.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "MarcoFaul\\SwDevToolSixBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MarcoFaul\\SwDevToolSixBundle\\Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "symfony/phpunit-bridge": "^5.0"
+    }
+}

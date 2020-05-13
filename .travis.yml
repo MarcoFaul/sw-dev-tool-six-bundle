@@ -1,0 +1,61 @@
+language: php
+dist: xenial
+os: linux
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+    - .phpunit
+
+env:
+  global:
+    - deps=no
+    - SYMFONY_PHPUNIT_DIR="$HOME/symfony-bridge/.phpunit"
+
+php:
+  - 7.2
+  - 7.3
+  - 7.4
+
+jobs:
+  fast_finish: true
+  include:
+    # Minimum supported dependencies with the latest and oldest PHP version
+    - php: 7.2
+      env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" SYMFONY_DEPRECATIONS_HELPER="max[self]=0"
+
+      # Test the latest stable release
+    - php: 7.2
+    - php: 7.3
+    - php: 7.4
+      env: COVERAGE=true PHPUNIT_FLAGS="-v --coverage-text"
+
+      # Latest commit to master
+    - php: 7.2
+      env: STABILITY="dev"
+
+  allow_failures:
+    # Dev-master is allowed to fail.
+    - env: STABILITY="dev"
+
+before_install:
+  - export SYMFONY_PHPUNIT_DIR="$(pwd)/.phpunit"
+  - composer require php-coveralls/php-coveralls --dev
+
+install:
+  - travis_retry composer self-update
+  - composer update ${COMPOSER_FLAGS} --prefer-dist --no-interaction
+  - php vendor/bin/simple-phpunit install
+
+before_script:
+  - composer config discard-changes true
+
+script:
+  - mkdir -p build/logs
+  - composer validate --strict --no-check-lock
+  # simple-phpunit is the PHPUnit wrapper provided by the PHPUnit Bridge component and
+  # it helps with testing legacy code and deprecations (composer require symfony/phpunit-bridge)
+  - ./vendor/bin/simple-phpunit tests -v
+
+after_success:
+  - travis_retry php vendor/bin/php-coveralls
+  - bash <(curl -s https://codecov.io/bash)
