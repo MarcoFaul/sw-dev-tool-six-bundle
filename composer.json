@@ -2,6 +2,7 @@
     "name": "marcofaul/sw-dev-tool-six-bundle",
     "description": "Helper tool for developing with showpare six",
     "type": "symfony-bundle",
+    "version": "1.0.0",
     "license": "MIT",
     "authors": [
         {

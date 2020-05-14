@@ -5,15 +5,13 @@ Todos:
 - [ ] Change readme
 - [ ] Add code coverage pipline badge
 - [ ] Add unittest pipline badge
-- [ ] Change composer version
-- [ ] publish to packagist
 - [ ] write tests
 - [ ] add other use full stuff
-- [x] enable travis CI
 
-The Bundle provides the default implementation of `enm/shopware-sdk` with `guzzlehttp/guzzle` and `jms/serializer` as service.
 
 [![Build Status](https://travis-ci.com/MarcoFaul/sw-dev-tool-six-bundle.svg?branch=master)](https://travis-ci.com/MarcoFaul/sw-dev-tool-six-bundle)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 
 ## Installation
 
