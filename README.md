@@ -1,7 +1,10 @@
 # Shopware Developer Tool
 =======================
 
-Todos: 
+## Todos: 
+- [ ] Fix config
+- [ ] Set description to config + readme config
+- [ ] Set config aliax (devTool)
 - [ ] Change readme
 - [ ] write tests
 - [ ] add other use full stuff
@@ -37,7 +40,12 @@ Simply configure your shop connection over the global `config.yml`:
 
     sw_dev_tool_six:
         access_token_ttl: P1W
-        enable_dal_caching: false:
+        enable_dal_caching: false
+        shopware:
+            skipFirstRunWizardClient: true
+            disableAutoUpdate: true
+            disableApiAuthRequire: true
+            disableCSRF: true
 
 ## Tests
 

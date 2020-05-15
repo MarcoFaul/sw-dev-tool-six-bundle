@@ -8,7 +8,7 @@ cache:
 env:
   global:
     - deps=no
-    - PHPUNIT_FLAGS="-v"
+    - PHPUNIT_FLAGS="-v --coverage-clover=coverage.xml"
     - SYMFONY_PHPUNIT_DIR="$HOME/symfony-bridge/.phpunit"
 
 php:

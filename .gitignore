@@ -5,3 +5,4 @@ composer.lock
 .idea
 /var/cache/
 /tests/cache/
+/coverage.xml
