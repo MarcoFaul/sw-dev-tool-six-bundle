@@ -3,15 +3,13 @@
 
 Todos: 
 - [ ] Change readme
-- [ ] Add code coverage pipline badge
-- [ ] Add unittest pipline badge
 - [ ] write tests
 - [ ] add other use full stuff
 
 
 [![Build Status](https://travis-ci.com/MarcoFaul/sw-dev-tool-six-bundle.svg?branch=master)](https://travis-ci.com/MarcoFaul/sw-dev-tool-six-bundle)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
+[![codecov](https://codecov.io/gh/MarcoFaul/sw-dev-tool-six-bundle/branch/master/graph/badge.svg)](https://codecov.io/gh/MarcoFaul/sw-dev-tool-six-bundle)
 
 ## Installation
 
