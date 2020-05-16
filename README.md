@@ -14,22 +14,14 @@
 
     composer require marcofaul/sw-dev-tool-six-bundle --dev
 
-In your `AppKernel`:
+*This is optional.* 
+Shopware 6 is using flex, so it will be automatically added to your `config/bundles.php`:
 
-    /**
-     * @return array
-     */
-    public function registerBundles()
-    {
-        $bundles = [
+    return [
           // ...
-          new \JMS\SerializerBundle\JMSSerializerBundle(),
-          new \MarcoFaul\SwDevToolSixBundle\SwDevToolSixBundle(),
-        ];
-         // ...
-         
-        return $bundles;
-    }
+          MarcoFaul\SwDevToolSixBundle\SwDevToolSixBundle::class => ['all' => true]  
+          // ...
+    ];
 
 ## Configuration
 Simply configure your shop connection over the global `config.yml`:
@@ -46,3 +38,6 @@ Simply configure your shop connection over the global `config.yml`:
 ## Tests
 
     php vendor/bin/simple-phpunit
+    or
+    php vendor/bin/phpunit
+    
