@@ -4,6 +4,19 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <defaults public="true" autowire="true"/>
+        <defaults public="true" autowire="true" autoconfigure="true"/>
+
+
+        <!-- custom AuthorizationServer implementation -->
+        <service id="marco_faul.api.authorization_server" class="MarcoFaul\SwDevToolSixBundle\Api\EventListener\Authentication\AuthorizationServer">
+            <argument type="service" id="Shopware\Core\Framework\Api\OAuth\ClientRepository"/>
+            <argument type="service" id="Shopware\Core\Framework\Api\OAuth\AccessTokenRepository"/>
+            <argument type="service" id="Shopware\Core\Framework\Api\OAuth\ScopeRepository"/>
+            <argument type="service" id="shopware.private_key"/>
+            <argument>%env(APP_SECRET)%</argument>
+            <argument>%sw_dev_tool_six.access_token_ttl%</argument>
+            <argument type="service" id="Shopware\Core\Framework\Api\OAuth\UserRepository"/>
+            <argument type="service" id="Shopware\Core\Framework\Api\OAuth\RefreshTokenRepository"/>
+        </service>
     </services>
 </container>

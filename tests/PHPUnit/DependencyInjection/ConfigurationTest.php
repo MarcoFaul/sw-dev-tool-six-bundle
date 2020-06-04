@@ -19,8 +19,9 @@ class ConfigurationTest extends TestCase
 
         $this->assertEquals('sw_dev_tool_six', $configTreeBuilder->buildTree()->getName());
 
-        $this->assertEquals(3, \count($configTreeBuilder->buildTree()->getChildren()));
+        $this->assertEquals(4, \count($configTreeBuilder->buildTree()->getChildren()));
         $this->assertEquals(4, \count($configTreeBuilder->buildTree()->getChildren()['shopware']->getChildren()));
+        $this->assertEquals(1, \count($configTreeBuilder->buildTree()->getChildren()['twig']->getChildren()));
 
     }
 }

@@ -7,7 +7,7 @@ namespace MarcoFaul\SwDevToolSixBundle\Tests\PHPUnit\DependencyInjection\Compile
 use Doctrine\DBAL\Connection;
 use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\ResourceServer;
-use MarcoFaul\SwDevToolSixBundle\DependencyInjection\Compiler\OverrideConfigurationPass;
+use MarcoFaul\SwDevToolSixBundle\DependencyInjection\Compiler\DALCachingPass;
 use PHPUnit\Framework\TestCase;
 use Shopware\Core\Framework\Api\EventListener\Authentication\ApiAuthenticationListener;
 use Shopware\Core\Framework\Api\OAuth\RefreshTokenRepository;
@@ -22,12 +22,12 @@ use Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-class OverrideConfigurationPassTest extends TestCase
+class DALCachingPassTest extends TestCase
 {
     /** @var ContainerBuilder */
     private $containerBuilder;
 
-    /** @var OverrideConfigurationPass */
+    /** @var DALCachingPass */
     private $pass;
 
     /**
@@ -35,36 +35,17 @@ class OverrideConfigurationPassTest extends TestCase
      */
     public function setUp(): void
     {
-        $this->pass = new OverrideConfigurationPass();
+        $this->pass = new DALCachingPass();
         $this->containerBuilder = new ContainerBuilder();
-        $this->containerBuilder->setParameter('sw_dev_tool_six.shopware.skip_first_run_wizard_client', true);
-        $this->containerBuilder->setParameter('sw_dev_tool_six.shopware.enable_auto_update', true);
-        $this->containerBuilder->setParameter('sw_dev_tool_six.shopware.enable_api_auth_require', true);
-        $this->containerBuilder->setParameter('sw_dev_tool_six.shopware.enable_storefront_csrf', true);
         $this->containerBuilder->setParameter('sw_dev_tool_six.enable_dal_caching', true);
-        $this->containerBuilder->setParameter('sw_dev_tool_six.access_token_ttl', 'P1W');
 
         $this->containerBuilder->setDefinition('Shopware\Core\Framework\Api\EventListener\Authentication\ApiAuthenticationListener', new Definition(ApiAuthenticationListener::class, []));
         $this->containerBuilder->setDefinition('shopware.api.resource_server', new Definition(ResourceServer::class, []));
-        $this->containerBuilder->setDefinition('shopware.api.authorization_server', new Definition(AuthorizationServer::class, []));
+        $this->containerBuilder->setDefinition('marco_faul.api.authorization_server', new Definition(AuthorizationServer::class, []));
         $this->containerBuilder->setDefinition('Shopware\Core\Framework\Api\OAuth\UserRepository', new Definition(UserRepository::class, []));
         $this->containerBuilder->setDefinition('Shopware\Core\Framework\Api\OAuth\RefreshTokenRepository', new Definition(RefreshTokenRepository::class, []));
         $this->containerBuilder->setDefinition('Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory', new Definition(PsrHttpFactory::class, []));
         $this->containerBuilder->setDefinition('Shopware\Core\Framework\Routing\RouteScopeRegistry', new Definition(RouteScopeRegistry::class, []));
-    }
-
-    /**
-     * @test
-     * @group configuration
-     */
-    public function process()
-    {
-        $this->pass->process($this->containerBuilder);
-
-        $this->assertTrue($this->containerBuilder->getParameter('sw_dev_tool_six.shopware.skip_first_run_wizard_client'));
-        $this->assertTrue($this->containerBuilder->getParameter('sw_dev_tool_six.shopware.enable_auto_update'));
-        $this->assertTrue($this->containerBuilder->getParameter('sw_dev_tool_six.shopware.enable_api_auth_require'));
-        $this->assertTrue($this->containerBuilder->getParameter('sw_dev_tool_six.shopware.enable_storefront_csrf'));
     }
 
     /**

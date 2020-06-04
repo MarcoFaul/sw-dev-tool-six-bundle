@@ -20,10 +20,13 @@ class SwDevToolSixExtensionTest extends TestCase
             'access_token_ttl' => 'P1W',
             'enable_dal_caching' => false,
             'shopware' => [
-                'skip_first_run_wizard_client' => true,
-                'enable_auto_update' => false,
-                'enable_api_auth_require' => false,
-                'enable_storefront_csrf' => false
+                'run_wizard' => true,
+                'auto_update' => false,
+                'api_auth_require' => false,
+                'storefront_csrf' => false
+            ],
+            'twig' => [
+                'debug' => true
             ]
         ];
         $swDevToolSixExtension = new SwDevToolSixExtension();
@@ -31,12 +34,13 @@ class SwDevToolSixExtensionTest extends TestCase
 
 
         $expected = [
+            'sw_dev_tool_six.twig.debug' => true,
             'sw_dev_tool_six.access_token_ttl' => 'P1W',
             'sw_dev_tool_six.enable_dal_caching' => false,
-            'sw_dev_tool_six.shopware.skip_first_run_wizard_client' => true,
-            'sw_dev_tool_six.shopware.enable_auto_update' => false,
-            'sw_dev_tool_six.shopware.enable_api_auth_require' => false,
-            'sw_dev_tool_six.shopware.enable_storefront_csrf' => false,
+            'sw_dev_tool_six.shopware.run_wizard' => true,
+            'sw_dev_tool_six.shopware.auto_update' => false,
+            'sw_dev_tool_six.shopware.api_auth_require' => false,
+            'sw_dev_tool_six.shopware.storefront_csrf' => false,
         ];
 
         $this->assertEquals($expected, $containerBuilder->getParameterBag()->all());

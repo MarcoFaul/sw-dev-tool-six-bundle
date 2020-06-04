@@ -9,6 +9,8 @@
 - Set administration login token ttl (time to live)
 - Disable dal entity caching
 - Set default development parameters
+- Disables twig cache
+- Disable storefront error handling
 
 ## Installation
 
@@ -30,10 +32,12 @@ Simply configure your shop connection over the global `config.yml`:
         access_token_ttl: P1W
         enable_dal_caching: false
         shopware:
-            skip_first_run_wizard_client: true
-            enable_auto_update: false
-            enable_api_auth_require: false
-            enable_storefront_csrf: false
+            run_wizard: true
+            auto_update: false
+            api_auth_require: false
+            storefront_csrf: false
+        twig:
+            debug: true
 
 ## Tests
 

@@ -4,8 +4,9 @@
 namespace MarcoFaul\SwDevToolSixBundle\Tests;
 
 
-use MarcoFaul\SwDevToolSixBundle\DependencyInjection\Compiler\OverrideConfigurationPass;
-use MarcoFaul\SwDevToolSixBundle\DependencyInjection\ConfigurationExtension;
+use MarcoFaul\SwDevToolSixBundle\DependencyInjection\Compiler\DALCachingPass;
+use MarcoFaul\SwDevToolSixBundle\DependencyInjection\Compiler\ParametersPass;
+use MarcoFaul\SwDevToolSixBundle\DependencyInjection\Compiler\StorefrontTokenTTLPass;
 use MarcoFaul\SwDevToolSixBundle\DependencyInjection\SwDevToolSixExtension;
 use MarcoFaul\SwDevToolSixBundle\SwDevToolSixBundle;
 use PHPUnit\Framework\TestCase;
@@ -36,6 +37,14 @@ class SwDevToolSixBundleTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function PASSES(): void
+    {
+        $this->assertEquals([ParametersPass::class, DALCachingPass::class, StorefrontTokenTTLPass::class], SwDevToolSixBundle::PASSES);
+    }
+
+    /**
      * check that our override pass is added
      * @test
      */
@@ -43,15 +52,15 @@ class SwDevToolSixBundleTest extends TestCase
     {
         $container = new ContainerBuilder();
         $this->swDevToolSixBundle->build($container);
-        $success = false;
+        $successCount = 0;
 
         foreach ($container->getCompilerPassConfig()->getPasses() as $pass) {
-            if ($pass instanceof OverrideConfigurationPass) {
-                $success = true;
-                break;
+
+            if ($pass instanceof ParametersPass || $pass instanceof DALCachingPass || $pass instanceof StorefrontTokenTTLPass) {
+                $successCount++;
             }
         }
 
-        $this->assertTrue($success);
+        $this->assertEquals(\count(SwDevToolSixBundle::PASSES), $successCount);
     }
 }

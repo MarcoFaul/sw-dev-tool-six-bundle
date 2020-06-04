@@ -19,13 +19,17 @@ class Configuration implements ConfigurationInterface
                 ->booleanNode('enable_dal_caching')->defaultFalse()->info('Disable the DAL entity searcher cache')->end()
                 ->arrayNode('shopware')
                     ->children()
-                        ->scalarNode('skip_first_run_wizard_client')->defaultTrue()->info('Disables the wizard')->end()
-                        ->scalarNode('enable_auto_update')->defaultFalse()->info('Disables the administration update popup')->end()
-                        ->scalarNode('enable_api_auth_require')->defaultFalse()->info('Disable api auth requirement')->end()
-                        ->scalarNode('enable_storefront_csrf')->defaultFalse()->info('Disables the Cross-Site-Request-Forgery security on the storefront')->end()
+                        ->scalarNode('run_wizard')->defaultTrue()->info('Disables the wizard')->end()
+                        ->scalarNode('auto_update')->defaultFalse()->info('Disables the administration update popup')->end()
+                        ->scalarNode('api_auth_require')->defaultFalse()->info('Disable api auth requirement')->end()
+                        ->scalarNode('storefront_csrf')->defaultFalse()->info('Disables the Cross-Site-Request-Forgery security on the storefront')->end()
                     ->end()
                 ->end()
-
+                ->arrayNode('twig')
+                    ->children()
+                        ->scalarNode('debug')->defaultTrue()->info('Enable twig debugging')->end()
+                    ->end()
+                ->end()
             ->end();
         return $treeBuilder;
     }
