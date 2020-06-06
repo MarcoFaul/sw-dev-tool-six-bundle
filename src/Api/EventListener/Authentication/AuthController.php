@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @RouteScope(scopes={"api"})
+ * @codeCoverageIgnore
  */
 class AuthController extends AbstractController
 {

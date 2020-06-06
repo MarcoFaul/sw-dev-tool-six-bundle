@@ -5,14 +5,20 @@ namespace MarcoFaul\SwDevToolSixBundle\Tests\PHPUnit\Api\EventListener\Authentic
 
 
 use MarcoFaul\SwDevToolSixBundle\Api\EventListener\Authentication\ApiAuthenticationListenerExtension;
+use MarcoFaul\SwDevToolSixBundle\Tests\KernelTest;
 use PHPUnit\Framework\TestCase;
 use Shopware\Core\Framework\Routing\KernelListenerPriorities;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 class ApiAuthenticationListenerExtensionTest extends TestCase
 {
-
-    public function getSubscribedEvents()
+    /**
+     * @test
+     */
+    public function getSubscribedEvents(): void
     {
         $events = [
             KernelEvents::REQUEST => [
@@ -24,13 +30,5 @@ class ApiAuthenticationListenerExtensionTest extends TestCase
         ];
 
         $this->assertEquals(ApiAuthenticationListenerExtension::getSubscribedEvents(), $events);
-    }
-
-    /**
-     * @test
-     */
-    public function blub()
-    {
-        $this->assertEquals(42, 42);
     }
 }

@@ -80,6 +80,7 @@ class AuthorizationServer implements EmitterAwareInterface
      * @param UserRepositoryInterface $userRepository
      * @param RefreshTokenRepositoryInterface $refreshTokenRepository
      * @param null|ResponseTypeInterface $responseType
+     * @codeCoverageIgnore
      */
     public function __construct(
         ClientRepositoryInterface $clientRepository,
@@ -120,6 +121,7 @@ class AuthorizationServer implements EmitterAwareInterface
      *
      * @param GrantTypeInterface $grantType
      * @param null|DateInterval  $accessTokenTTL
+     * @codeCoverageIgnore
      */
     public function enableGrantType(GrantTypeInterface $grantType, DateInterval $accessTokenTTL = null)
     {
@@ -146,6 +148,7 @@ class AuthorizationServer implements EmitterAwareInterface
      * @throws OAuthServerException
      *
      * @return AuthorizationRequest
+     * @codeCoverageIgnore
      */
     public function validateAuthorizationRequest(ServerRequestInterface $request)
     {
@@ -165,6 +168,7 @@ class AuthorizationServer implements EmitterAwareInterface
      * @param ResponseInterface    $response
      *
      * @return ResponseInterface
+     * @codeCoverageIgnore
      */
     public function completeAuthorizationRequest(AuthorizationRequest $authRequest, ResponseInterface $response)
     {
@@ -223,6 +227,7 @@ class AuthorizationServer implements EmitterAwareInterface
      * Get the token type that grants will return in the HTTP response.
      *
      * @return ResponseTypeInterface
+     * @codeCoverageIgnore
      */
     protected function getResponseType()
     {
@@ -241,6 +246,7 @@ class AuthorizationServer implements EmitterAwareInterface
      * Set the default scope for the authorization server.
      *
      * @param string $defaultScope
+     * @codeCoverageIgnore
      */
     public function setDefaultScope($defaultScope)
     {

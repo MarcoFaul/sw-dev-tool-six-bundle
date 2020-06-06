@@ -24,34 +24,22 @@ class ApiAuthenticationListenerExtension implements EventSubscriberInterface
 {
     use RouteScopeCheckTrait;
 
-    /**
-     * @var ResourceServer
-     */
+    /** @var ResourceServer */
     private $resourceServer;
 
-    /**
-     * @var AuthorizationServer
-     */
+    /** @var AuthorizationServer  */
     private $authorizationServer;
 
-    /**
-     * @var UserRepositoryInterface
-     */
+    /** @var UserRepositoryInterface  */
     private $userRepository;
 
-    /**
-     * @var RefreshTokenRepositoryInterface
-     */
+    /** @var RefreshTokenRepositoryInterface */
     private $refreshTokenRepository;
 
-    /**
-     * @var PsrHttpFactory
-     */
+    /** @var PsrHttpFactory  */
     private $psrHttpFactory;
 
-    /**
-     * @var RouteScopeRegistry
-     */
+    /** @var RouteScopeRegistry  */
     private $routeScopeRegistry;
 
     public function __construct(
@@ -82,6 +70,10 @@ class ApiAuthenticationListenerExtension implements EventSubscriberInterface
         ];
     }
 
+    /**
+     * @param RequestEvent $event
+     * @codeCoverageIgnore
+     */
     public function setupOAuth(RequestEvent $event): void
     {
         if (!$event->isMasterRequest()) {
@@ -103,6 +95,11 @@ class ApiAuthenticationListenerExtension implements EventSubscriberInterface
         $this->authorizationServer->enableGrantType(new ClientCredentialsGrant(), $tenMinuteInterval);
     }
 
+    /**
+     * @param ControllerEvent $event
+     * @throws \League\OAuth2\Server\Exception\OAuthServerException
+     * @codeCoverageIgnore
+     */
     public function validateRequest(ControllerEvent $event): void
     {
         $request = $event->getRequest();
@@ -121,6 +118,10 @@ class ApiAuthenticationListenerExtension implements EventSubscriberInterface
         $request->attributes->add($psr7Request->getAttributes());
     }
 
+    /**
+     * @return RouteScopeRegistry
+     * @codeCoverageIgnore
+     */
     protected function getScopeRegistry(): RouteScopeRegistry
     {
         return $this->routeScopeRegistry;
